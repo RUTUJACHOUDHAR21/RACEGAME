@@ -192,6 +192,50 @@
         car.x += laneWidth;
       }
     });
+    // Touch Controls for Phones
+let touchStartX = null;
+
+canvas.addEventListener("touchstart", (e) => {
+  touchStartX = e.changedTouches[0].clientX;
+});
+
+canvas.addEventListener("touchend", (e) => {
+  if (gameOver) return;
+  let touchEndX = e.changedTouches[0].clientX;
+  let dx = touchEndX - touchStartX;
+
+  if (Math.abs(dx) > 30) { // swipe threshold
+    if (dx < 0) moveCarLeft();
+    else moveCarRight();
+  }
+});
+
+// Mouse click-based control (for desktops)
+canvas.addEventListener("click", (e) => {
+  if (gameOver) return;
+  let clickX = e.clientX;
+  if (clickX < canvas.width / 2) {
+    moveCarLeft();
+  } else {
+    moveCarRight();
+  }
+});
+
+// Helper movement functions
+function moveCarLeft() {
+  const roadX = (canvas.width - laneWidth * laneCount) / 2;
+  if (car.x > roadX + 10) {
+    car.x -= laneWidth;
+  }
+}
+
+function moveCarRight() {
+  const roadX = (canvas.width - laneWidth * laneCount) / 2;
+  if (car.x < roadX + laneWidth * (laneCount - 1)) {
+    car.x += laneWidth;
+  }
+}
+
 
     resizeCanvas();
   </script>
