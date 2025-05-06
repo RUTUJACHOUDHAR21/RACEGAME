@@ -60,7 +60,7 @@
 <body>
   <div id="scoreDisplay">Score: 0</div>
   <div id="overlay">
-    <div id="message">🚦 Click to Start</div>
+    <div id="message">🚦 Click Start to Play</div>
     <button onclick="startGame()">Start</button>
   </div>
   <canvas id="gameCanvas"></canvas>
@@ -179,7 +179,7 @@
     function endGame() {
       gameOver = true;
       cancelAnimationFrame(animationId);
-      message.innerHTML = "💥 Game Over<br>Score: " + score;
+      message.innerHTML = `💥 Game Over<br>Score: ${score}`;
       overlay.style.display = "flex";
     }
 
@@ -193,7 +193,6 @@
       }
     });
 
-    // Initialize full screen layout
     resizeCanvas();
   </script>
 </body>
